@@ -1,4 +1,4 @@
-import re
+import re, sys
 
 harmonica = [
     "+1 (C)",
@@ -84,21 +84,16 @@ def matches_position(bitmap, position):
     return shifted_bitmap & harmonica_bitmap == shifted_bitmap
 
 def main():
-    #abc_input = 'CDEFGABc'
-    #abc_input = 'GFGF E2 C2 | EF GFGF | EFGA _BABA | G2 z2 z4'
-    #abc_input = 'CDEGAc'
-    abc_input = raw_input()
+    abc_input = sys.stdin.read()
 
     notes = get_notes(abc_input)
     note_values = [note_value(note) for note in notes]
     normalized_note_values = normalize_note_values(note_values)
-    print(set(normalized_note_values))
     first = normalized_note_values[0]
     bitmap = note_values_to_bitmap(normalized_note_values)
     positions = find_positions(bitmap)
-    print("Start on:")
     for position in positions:
-        print(harmonica[position + first])
+        print("lowest: %s, start on: %s" % (harmonica[position], harmonica[position + first]))
 
 if __name__ == '__main__':
     main()
