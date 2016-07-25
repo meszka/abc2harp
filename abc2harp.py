@@ -55,7 +55,7 @@ def note_value(note):
     elif note[0] == '^':
         accidental = 1
     letter = note[-1]
-    value = accidental + simple_note_value(note)
+    value = accidental + simple_note_value(letter)
     return value
 
 def simple_note_value(note):
